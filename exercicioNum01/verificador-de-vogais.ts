@@ -48,7 +48,7 @@ const quantidadeDeVogais = contarVogais(palavra)
 let palavraUser = prompt("Digite uma palavra:") || ""
 
 while (!validarEntrada(palavraUser)) {
-    alert("Por favor, digite apenas letras e não deixe o campo vazio.")
+    alert("Por favor, digite apenas letras e não deixe o campo vazio ou com espaço entre as palavras.")
     palavraUser = prompt("Digite uma palavra:") || ""
 }
 
