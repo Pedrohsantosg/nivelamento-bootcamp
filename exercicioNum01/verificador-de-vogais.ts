@@ -1,58 +1,52 @@
 /**
- * Conta o número de vogais em uma palavra.
+ * Counts the number of vowels in a word.
  *
  * @remarks
- * Esta função faz parte do subsistema {@link core-library#StringUtilities | StringUtilities}.
+ * This function is part of the {@link core-library#StringUtilities | StringUtilities} subsystem.
  *
- * @param palavra - A palavra na qual contar as vogais
- * @returns O número de vogais na palavra
+ * @param word - The word in which to count the vowels
+ * @returns The number of vowels in the word
  *
  * @beta
  */
-function contarVogais(palavra: string): number {
-    const vogais = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
-    let contador = 0
-
-    for (let letra of palavra) {
-        if (vogais.includes(letra)) {
-            contador++
-        }
-    }
-    return contador
+function countVowels(word: string): number {
+    const vowelsFound = word.match(/[aeiouAEIOU]/g)
+    return vowelsFound ? vowelsFound.length : 0
 }
 
 /**
- * Imprime o resultado da contagem de vogais.
+ * Prints the result of the vowel count.
  *
- * @param palavra - A palavra analisada
- * @param quantidadeDeVogais - O número de vogais na palavra
+ * @param word - The analyzed word
+ * @param vowelCount - The number of vowels in the word
  */
-function printResult(palavra: string, quantidadeDeVogais: number): void {
-    console.log(`A palavra "${palavra}" tem ${quantidadeDeVogais} vogais.`)
+function printResult(word: string, vowelCount: number): void {
+    console.log(`The word "${word}" has ${vowelCount} vowels.`)
 }
 
 /**
- * Valida se a entrada é uma palavra composta apenas por letras.
+ * Validates if the input is a word composed only of letters and spaces.
  *
- * @param palavra - A palavra a ser validada
- * @returns Verdadeiro se a palavra for válida, falso caso contrário
+ * @param word - The word to be validated
+ * @returns True if the word is valid, false otherwise
  */
-function validarEntrada(palavra: string): boolean {
-    const regex = /^[a-zA-Z]+$/
-    return regex.test(palavra)
+function validateInput(word: string): boolean {
+    return /^[a-zA-Z\s]+$/.test(word)
 }
 
-const palavra = 'OrionBootCamp Backend'
-const quantidadeDeVogais = contarVogais(palavra)
+const word = 'Orion Boot Camp Backend'
+const vowelCount: number = countVowels(word)
 
-let palavraUser = prompt("Digite uma palavra:") || ""
+let userWord: string = prompt("Enter a word:") || ""
+userWord = userWord.trim()
 
-while (!validarEntrada(palavraUser)) {
-    alert("Por favor, digite apenas letras e não deixe o campo vazio.")
-    palavraUser = prompt("Digite uma palavra:") || ""
+while (!validateInput(userWord)) {
+    alert("Please enter only letters and spaces, and do not leave the field empty.")
+    userWord = prompt("Enter a word:") || ""
+    userWord = userWord.trim()
 }
 
-const quantidadeDeVogaisUser = contarVogais(palavraUser)
+const userVowelCount: number = countVowels(userWord)
 
-printResult(palavra, quantidadeDeVogais)
-printResult(palavraUser, quantidadeDeVogaisUser)
+printResult(word, vowelCount)
+printResult(userWord, userVowelCount)
