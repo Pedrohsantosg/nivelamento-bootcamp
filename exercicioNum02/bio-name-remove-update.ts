@@ -1,5 +1,5 @@
 /**
- * Interface que representa uma pessoa.
+ * Interface representing a person.
  */
 interface Person {
     id: number
@@ -8,14 +8,14 @@ interface Person {
 }
 
 /**
- * Tipo que representa uma descrição, que pode ser uma string ou indefinida.
+ * Type representing a description, which can be a string or undefined.
  */
-type Descricao = string | undefined
-
+type IdDescription = string | undefined
 /**
- * Lista de pessoas com suas respectivas biografias.
+ * List of people with their respective biographies.
  */
-let lista: Array<Person> = [
+
+let list: Array<Person> = [
     { id: 1, name: "Ada Lovelace", bio: "Ada Lovelace foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina" },
     { id: 2, name: "Alan Turing", bio: "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial" },
     { id: 3, name: "Nikola Tesla", bio: "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
@@ -23,130 +23,132 @@ let lista: Array<Person> = [
 ]
 
 /**
- * Retorna a biografia de uma pessoa com base no ID.
+ * Returns a person's biography based on their ID.
  *
- * @param id - O ID da pessoa
- * @returns A biografia da pessoa ou indefinido se não encontrada
+ * @param id - The person's ID
+ * @returns The person's biography or undefined if not found
  */
-function getBioById(id: number): Descricao {
-    return lista.find(objectList => objectList.id === id)?.bio
+function getBioById(id: number): IdDescription {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].id === id) {
+            return list[i].bio
+        }
+    }
+    return undefined
 }
 
 /**
- * Retorna o nome de uma pessoa com base no ID.
+ * Returns a person's name based on their ID.
  *
- * @param id - O ID da pessoa
- * @returns O nome da pessoa ou indefinido se não encontrada
+ * @param id - The person's ID
+ * @returns The person's name or undefined if not found
  */
-function getNameById(id: number): Descricao {
-    return lista.find(objectList => objectList.id === id)?.name
+function getNameById(id: number): IdDescription {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].id === id) {
+            return list[i].name
+        }
+    }
+    return undefined
 }
 
 /**
- * Remove uma pessoa da lista com base no ID.
+ * Removes a person from the list based on their ID.
  *
- * @param id - O ID da pessoa a ser removida
- * @returns Verdadeiro se a pessoa foi encontrada e removida, falso caso contrário
+ * @param id - The ID of the person to be removed
+ * @returns True if the person was found and removed, false otherwise
  */
 function removeItemById(id: number): boolean {
-    const index = lista.findIndex(objectList => objectList.id === id)
-    if (index !== -1) {
-        lista.splice(index, 1)
-        return true
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].id === id) {
+            list.splice(i, 1)
+            return true
+        }
     }
     return false
 }
 
 /**
- * Solicita ao usuário o ID da pessoa e retorna a biografia e o nome.
+ * Prompts the user for a person's ID and returns their biography and name.
  *
- * @returns Um objeto contendo a biografia e o nome da pessoa
+ * @returns An object containing the person's biography and name
  */
-function promptUserForId(): { bioUser: string, nameUser: string } {
-    let bioUser = ""
-    let nameUser = ""
-
-    const inputUser = prompt("Insira o ID da pessoa:")
-    const id = Number(inputUser)
+function promptUserForId(): { viewUser: string, nameUser: string } {
+    let viewUser: string = ""
+    let nameUser: string = ""
+    const inputUser: string | null= prompt("Enter the person's ID:")
+    const id : number= Number(inputUser)
 
     if (!isNaN(id)) {
         const bio = getBioById(id)
         const name = getNameById(id)
         if (bio && name) {
-            bioUser = `Biografia: ${bio}`
+            viewUser = `Biography: ${bio}`
             nameUser = `${name}`
         } else {
-            bioUser = "ID não encontrado."
-            nameUser = "Nome não encontrado."
+            viewUser = "ID not found."
+            nameUser = "Name not found."
         }
     } else {
-        console.log("Entrada inválida. Por favor, insira um número.")
+        console.log("Invalid input. Please enter a number.")
     }
-    return { nameUser, bioUser }
+    return { nameUser, viewUser }
 }
+
 /**
- * Atualiza o nome e a biografia de uma pessoa na lista com base no ID.
+ * Updates a person's name and biography in the list based on their ID.
  *
- * @param id - O ID da pessoa a ser atualizada
- * @param newName - O novo nome da pessoa (opcional)
- * @param newBio - A nova biografia da pessoa (opcional)
- * @returns Verdadeiro se a pessoa foi encontrada e atualizada, falso caso contrário
+ * @param id - The ID of the person to be updated
+ * @param newName - The person's new name (optional)
+ * @param newBio - The person's new biography (optional)
+ * @returns True if the person was found and updated, false otherwise
  */
 function updatePersonById(id: number, newName?: string, newBio?: string): boolean {
-    const person = lista.find(objectList => objectList.id === id)
-    if (person) {
-        if (newName && newBio) {
-            person.name = newName
-            person.bio = newBio
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].id === id) {
+            if (newName) list[i].name = newName
+            if (newBio) list[i].bio = newBio
+            return true
         }
-        return true
-    } else {
-        return false
     }
+    return false
 }
+
 /**
- * Solicita ao usuário o ID da pessoa a ser atualizada e os novos dados.
- * Atualiza a pessoa na lista se o ID for válido.
+ * Prompts the user for the ID of the person to be updated and the new data.
+ * Updates the person in the list if the ID is valid.
  */
-function UpdateUser(): void {
-    const inputUser = prompt("Insira o ID da pessoa que deseja atualizar:")
-    const id = Number(inputUser)
+function updateUser(): void {
+    const inputUser : string | null = prompt("Enter the ID of the person you want to update:")
+    const id : number = Number(inputUser)
 
     if (!Number.isNaN(id)) {
-        const newName = prompt("Insira o novo nome (deixe em branco para não alterar):")
-        const newBio = prompt("Insira a nova biografia (deixe em branco para não alterar):")
-
-        const wasUpdated = updatePersonById(id, newName || undefined, newBio || undefined)
+        const newName: string | null = prompt("Enter the new name (leave blank to not change):")
+        const newBio: string | null = prompt("Enter the new biography (leave blank to not change):")
+        const wasUpdated : boolean = updatePersonById(id, newName || undefined, newBio || undefined)
         if (wasUpdated) {
-            console.log(`Item com ID ${id} foi atualizado.`)
+            console.log(`Item with ID ${id} was updated.`)
         } else {
-            console.log(`Item com ID ${id} não encontrado.`)
+            console.log(`Item with ID ${id} not found.`)
         }
     } else {
-        console.log("Entrada inválida. Por favor, insira um número.")
+        console.log("Invalid input. Please enter a number.")
     }
 }
 
 
 const result = promptUserForId()
 console.log(result.nameUser)
-console.log(result.bioUser)
-
-const idToRemove = Number(prompt("Insira o ID da pessoa a ser removida:"))
-const actionRemove = removeItemById(idToRemove)
+console.log(result.viewUser)
+const idToRemove : number = Number(prompt("Enter the ID of the person to be removed:"))
+const actionRemove : boolean = removeItemById(idToRemove)
 if (actionRemove) {
-    console.log(`Item com ID ${idToRemove} foi removido.`)
+    console.log(`Item with ID ${idToRemove} was removed.`)
 } else {
-    console.log(`Item com ID ${idToRemove} não encontrado.`)
+    console.log(`Item with ID ${idToRemove} not found.`)
 }
+console.log(list)
 
+updateUser()
 
-console.log(lista)
-
-
-UpdateUser()
-console.log(lista)
-
-
-
-
+console.log(list)
