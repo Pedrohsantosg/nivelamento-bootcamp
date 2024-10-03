@@ -119,6 +119,19 @@ function updateUser() {
         console.log("Invalid input. Please enter a number.");
     }
 }
+/**
+ * Displays the list of people with their names and biographies.
+ * Iterates through the list of people and appends each person's name and bio to the HTML element with the ID 'people-list'.
+ */
+function showPeople() {
+    var listElement = document.getElementById('people-list');
+    listElement.innerHTML = '';
+    list.forEach(function (person) {
+        var li = document.createElement('li');
+        li.innerText = "".concat(person.name, ": ").concat(person.bio);
+        listElement.appendChild(li);
+    });
+}
 var result = promptUserForId();
 console.log(result.nameUser);
 console.log(result.viewUser);

@@ -135,6 +135,19 @@ function updateUser(): void {
         console.log("Invalid input. Please enter a number.")
     }
 }
+/**
+ * Displays the list of people with their names and biographies.
+ * Iterates through the list of people and appends each person's name and bio to the HTML element with the ID 'people-list'.
+ */
+function showPeople(): void {
+    const listElement = document.getElementById('people-list') as HTMLUListElement;
+    listElement.innerHTML = '';
+    list.forEach(person => {
+        const li = document.createElement('li');
+        li.innerText = `${person.name}: ${person.bio}`;
+        listElement.appendChild(li);
+    });
+}
 
 
 const result = promptUserForId()
