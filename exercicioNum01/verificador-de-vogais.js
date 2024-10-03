@@ -1,51 +1,45 @@
 /**
- * Conta o número de vogais em uma palavra.
+ * Counts the number of vowels in a word.
  *
  * @remarks
- * Esta função faz parte do subsistema {@link core-library#StringUtilities | StringUtilities}.
+ * This function is part of the {@link core-library#StringUtilities | StringUtilities} subsystem.
  *
- * @param palavra - A palavra na qual contar as vogais
- * @returns O número de vogais na palavra
+ * @param word - The word in which to count the vowels
+ * @returns The number of vowels in the word
  *
  * @beta
  */
-function contarVogais(palavra) {
-    var vogais = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
-    var contador = 0;
-    for (var _i = 0, palavra_1 = palavra; _i < palavra_1.length; _i++) {
-        var letra = palavra_1[_i];
-        if (vogais.includes(letra)) {
-            contador++;
-        }
-    }
-    return contador;
+function countVowels(word) {
+    var matches = word.match(/[aeiouAEIOU]/g);
+    return matches ? matches.length : 0;
 }
 /**
- * Imprime o resultado da contagem de vogais.
+ * Prints the result of the vowel count.
  *
- * @param palavra - A palavra analisada
- * @param quantidadeDeVogais - O número de vogais na palavra
+ * @param word - The analyzed word
+ * @param vowelCount - The number of vowels in the word
  */
-function printResult(palavra, quantidadeDeVogais) {
-    console.log("A palavra \"".concat(palavra, "\" tem ").concat(quantidadeDeVogais, " vogais."));
+function printResult(word, vowelCount) {
+    console.log("The word \"".concat(word, "\" has ").concat(vowelCount, " vowels."));
 }
 /**
- * Valida se a entrada é uma palavra composta apenas por letras.
+ * Validates if the input is a word composed only of letters and spaces.
  *
- * @param palavra - A palavra a ser validada
- * @returns Verdadeiro se a palavra for válida, falso caso contrário
+ * @param word - The word to be validated
+ * @returns True if the word is valid, false otherwise
  */
-function validarEntrada(palavra) {
-    var regex = /^[a-zA-Z]+$/;
-    return regex.test(palavra);
+function validateInput(word) {
+    return /^[a-zA-Z\s]+$/.test(word);
 }
-var palavra = 'OrionBootCamp Backend';
-var quantidadeDeVogais = contarVogais(palavra);
-var palavraUser = prompt("Digite uma palavra:") || "";
-while (!validarEntrada(palavraUser)) {
-    alert("Por favor, digite apenas letras e não deixe o campo vazio ou com espaço entre a palavra.");
-    palavraUser = prompt("Digite uma palavra:") || "";
+var word = 'Orion Boot Camp Backend';
+var vowelCount = countVowels(word);
+var userWord = prompt("Enter a word:") || "";
+userWord = userWord.trim();
+while (!validateInput(userWord)) {
+    alert("Please enter only letters and spaces, and do not leave the field empty.");
+    userWord = prompt("Enter a word:") || "";
+    userWord = userWord.trim();
 }
-var quantidadeDeVogaisUser = contarVogais(palavraUser);
-printResult(palavra, quantidadeDeVogais);
-printResult(palavraUser, quantidadeDeVogaisUser);
+var userVowelCount = countVowels(userWord);
+printResult(word, vowelCount);
+printResult(userWord, userVowelCount);
