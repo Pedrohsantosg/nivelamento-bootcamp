@@ -9,28 +9,12 @@
         <script src= "verificador-de-vogais.js" defer></script>
     </head>
     <body>
-        <h1>Exercício de Vogais</h1>
-        <input type="text" id="input-vogais" placeholder="Digite uma palavra">
-        <button onclick="contarVogais()">Contar Vogais</button>
-        <p id="resultado-vogais"></p>
-    
-        <script>
-            function contarVogais() {
-                const input = document.getElementById('input-vogais').value;
-                const vogais = input.match(/[aeiou]/gi);
-                const resultado = vogais ? vogais.length : 0;
-                document.getElementById('resultado-vogais').innerText = `Número de vogais: ${resultado}`;
-            }
-        </script>
+        <h1>Vowel Exercise</h1>
+        <input type="text" id="input-vowels" placeholder="Enter a word">
+        <button onclick="handleVowelCount()">Count Vowels</button>
+        <p id="result-vowels"></p>
     </body>
     </html>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript</title>
-    <script src= "verificador-de-vogais.js" defer></script>
+ 
 </head>
-<body>
-    
-</body>
 </html>

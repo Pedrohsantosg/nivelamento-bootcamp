@@ -21,6 +21,8 @@ function countVowels(word) {
  */
 function printResult(word, vowelCount) {
     console.log("The word \"".concat(word, "\" has ").concat(vowelCount, " vowels."));
+    var resultElement = document.getElementById('result-vowels');
+    resultElement.innerText = "The word \"".concat(word, "\" has ").concat(vowelCount, " vowels.");
 }
 /**
  * Validates if the input is a word composed only of letters and spaces.
@@ -31,15 +33,13 @@ function printResult(word, vowelCount) {
 function validateInput(word) {
     return /^[a-zA-Z\s]+$/.test(word);
 }
-var word = 'Orion Boot Camp Backend';
-var vowelCount = countVowels(word);
-var userWord = prompt("Enter a word:") || "";
-userWord = userWord.trim();
-while (!validateInput(userWord)) {
-    alert("Please enter only letters and spaces, and do not leave the field empty.");
-    userWord = prompt("Enter a word:") || "";
-    userWord = userWord.trim();
+function handleVowelCount() {
+    var inputElement = document.getElementById('input-vowels');
+    var userWord = inputElement.value.trim();
+    if (!validateInput(userWord)) {
+        alert("Please enter only letters and spaces, and do not leave the field empty.");
+        return;
+    }
+    var userVowelCount = countVowels(userWord);
+    printResult(userWord, userVowelCount);
 }
-var userVowelCount = countVowels(userWord);
-printResult(word, vowelCount);
-printResult(userWord, userVowelCount);
