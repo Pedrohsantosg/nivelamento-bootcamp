@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript</title>
+    <title>People Array Exercise</title>
     <script src= "bio-name-remove-update.js" defer></script>
 </head>
 <body>
-    
+    <h1>People Array Exercise</h1>
+    <button onclick="showPeople()">Show People</button>
+    <ul id="people-list"></ul>
+
+    <script>
+        
+        function showPeople() {
+            const listElement = document.getElementById('people-list');
+            listElement.innerHTML = '';
+            list.forEach(person => {
+                const li = document.createElement('li');
+                li.innerText = `${person.name}: ${person.bio}`;
+                listElement.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
