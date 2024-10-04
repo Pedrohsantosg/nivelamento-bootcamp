@@ -38,7 +38,7 @@ function validateInput(word: string): boolean {
 
 function handleVowelCount(): void {
     const inputElement = document.getElementById('input-vowels') as HTMLInputElement;
-    let userWord: string = inputElement.value.trim();
+    const userWord: string = inputElement.value.trim();
 
     if (!validateInput(userWord)) {
         alert("Please enter only letters and spaces, and do not leave the field empty.");
