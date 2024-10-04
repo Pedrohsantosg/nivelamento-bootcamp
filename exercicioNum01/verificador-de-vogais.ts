@@ -10,8 +10,8 @@
  * @beta
  */
 function countVowels(word: string): number {
-    const matches = word.match(/[aeiouAEIOU]/g)
-    return matches ? matches.length : 0
+    const matches = word.match(/[aeiouAEIOU]/g);
+    return matches ? matches.length : 0;
 }
 
 /**
@@ -21,7 +21,9 @@ function countVowels(word: string): number {
  * @param vowelCount - The number of vowels in the word
  */
 function printResult(word: string, vowelCount: number): void {
-    console.log(`The word "${word}" has ${vowelCount} vowels.`)
+    console.log(`The word "${word}" has ${vowelCount} vowels.`);
+    const resultElement = document.getElementById('result-vowels') as HTMLParagraphElement;
+    resultElement.innerText = `The word "${word}" has ${vowelCount} vowels.`;
 }
 
 /**
@@ -31,22 +33,18 @@ function printResult(word: string, vowelCount: number): void {
  * @returns True if the word is valid, false otherwise
  */
 function validateInput(word: string): boolean {
-    return /^[a-zA-Z\s]+$/.test(word)
+    return /^[a-zA-Z\s]+$/.test(word);
 }
 
-const word = 'Orion Boot Camp Backend'
-const vowelCount: number = countVowels(word)
+function handleVowelCount(): void {
+    const inputElement = document.getElementById('input-vowels') as HTMLInputElement;
+    const userWord: string = inputElement.value.trim();
 
-let userWord: string = prompt("Enter a word:") || ""
-userWord = userWord.trim()
+    if (!validateInput(userWord)) {
+        alert("Please enter only letters and spaces, and do not leave the field empty.");
+        return;
+    }
 
-while (!validateInput(userWord)) {
-    alert("Please enter only letters and spaces, and do not leave the field empty.")
-    userWord = prompt("Enter a word:") || ""
-    userWord = userWord.trim()
+    const userVowelCount: number = countVowels(userWord);
+    printResult(userWord, userVowelCount);
 }
-
-const userVowelCount: number = countVowels(userWord)
-
-printResult(word, vowelCount)
-printResult(userWord, userVowelCount)
