@@ -16,8 +16,8 @@ jobs:
 
     - name: Set Git identity
       run: |
-        git config --global user.email "pedro.henrique.gomes@maisunifacisa.com.br"
-        git config --global user.name "pedrohsantosg"
+        git config --global user.email ""
+        git config --global user.name ""
 
     - name: Merge exercicio-vogais branch
       run: |
