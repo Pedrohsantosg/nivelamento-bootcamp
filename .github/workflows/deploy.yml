@@ -36,3 +36,6 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: exercicioNum03
+
+    - name: Finalize build
+      run: echo "Build and deployment completed!"
