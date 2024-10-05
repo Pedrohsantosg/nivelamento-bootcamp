@@ -50,6 +50,11 @@ jobs:
         cd exercicioNum03
         npm start
 
+    - name: Copy scripts
+      run: |
+        cp exercicioNum01/verificador-de-vogais.js exercicioNum03/
+        cp exercicioNum02/bio-name-remove-update.js exercicioNum03/
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
