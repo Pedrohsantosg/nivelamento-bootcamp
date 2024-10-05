@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - exercicio-web
 
 jobs:
   build:
@@ -12,6 +13,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        ref: exercicio-web
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -20,14 +23,16 @@ jobs:
     
     - name: Install dependencies
       run: |
-        npm init -y
+        cd exercicioNum03
         npm install
 
     - name: Build project
-      run: npm start 
+      run: |
+        cd exercicioNum03
+        npm start
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./exercicioNum03
+        publish_dir: exercicioNum03
