@@ -13,8 +13,22 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with:
-        ref: exercicio-web
+
+    - name: Merge exercicio-vogais branch
+      run: |
+        git fetch origin
+        git checkout exercicio-vogais
+        git pull origin exercicio-vogais
+        git checkout exercicio-web
+        git merge exercicio-vogais
+
+    - name: Merge exercicio-array-person branch
+      run: |
+        git fetch origin
+        git checkout exercicio-array-person
+        git pull origin exercicio-array-person
+        git checkout exercicio-web
+        git merge exercicio-array-person
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
